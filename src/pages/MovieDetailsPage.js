@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useParams, Outlet, Link } from 'react-router-dom';
+import { useEffect, useState, Suspense } from 'react';
+import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
 import { fetchMovieById } from 'api';
 import { nanoid } from 'nanoid';
 
 export default function MovieDetails() {
     const { movieId } = useParams();
     const [movie, setMovie] = useState({});
+    const location = useLocation();
+    const backLinkHref = location.state?.from ?? '/';
 
     useEffect(() => {
         if (!movieId) return;
@@ -33,6 +35,7 @@ export default function MovieDetails() {
 
     return (
         <main>
+            <Link to={backLinkHref}>Back</Link>
             <div>
                 <img src={
                     movie.poster_path
@@ -57,7 +60,9 @@ export default function MovieDetails() {
                     <li><Link to="reviews">Reviews</Link></li>
                 </ul>
 
-                <Outlet />
+                <Suspense fallback={<div>Loading subpage...</div>}>
+                    <Outlet />
+                </Suspense>
             </div>
         </main>
     )
