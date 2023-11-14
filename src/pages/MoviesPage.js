@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { MoviesList } from "components/MoviesList";
 import { SearchForm } from "components/SearchForm";
 import { fetchMovies } from 'api';
+import { Container } from '../components/Layout.styled';
 
 export default function MoviesPage() {
     const [movies, setMovies] = useState([]);
@@ -31,9 +32,9 @@ export default function MoviesPage() {
     };
 
     return (
-        <div>
+        <Container>
             <SearchForm onSubmit={onSubmit} value={query} />
             <MoviesList movies={movies} basePath='' />
-        </div>
+        </Container>
     )
 }

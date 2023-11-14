@@ -1,17 +1,10 @@
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-
-const Link = styled(NavLink)`
-  &.active {
-    color: pink;
-  }
-`;
+import { Link, Nav } from './Navigation.styled';
 
 export const Navigation = () => {
   return (
-    <nav>
+    <Nav>
       <Link to="/">Home</Link>
       <Link to="/movies">Movies</Link>
-    </nav>
+    </Nav>
   );
 };

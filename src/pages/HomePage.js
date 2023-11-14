@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { fetchTrending } from 'api';
 import { MoviesList } from 'components/MoviesList';
+import { Container } from '../components/Layout.styled';
 
 export default function HomePage() {
     const [trendingMovies, setTrendingMovies] = useState([]);
@@ -19,9 +20,9 @@ export default function HomePage() {
     }, []);
 
     return (
-        <div>
+        <Container>
             <h2>Trending today</h2>
             <MoviesList movies={trendingMovies} basePath="movies/" />
-        </div>
+        </Container>
     )
 }

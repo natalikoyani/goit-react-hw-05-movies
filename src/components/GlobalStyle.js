@@ -21,4 +21,14 @@ export const GlobalStyle = createGlobalStyle`
     max-width: 100%;
     object-fit: cover;
   }
+
+  a {
+    text-decoration: none;
+}
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 `;

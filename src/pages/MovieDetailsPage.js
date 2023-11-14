@@ -2,6 +2,8 @@ import { useEffect, useState, Suspense } from 'react';
 import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
 import { fetchMovieById } from 'api';
 import { nanoid } from 'nanoid';
+import { Container } from '../components/Layout.styled';
+import { DetailsContainer, Genres, AdditionalInformation } from './MovieDetailsPage.styled';
 
 export default function MovieDetails() {
     const { movieId } = useParams();
@@ -34,9 +36,9 @@ export default function MovieDetails() {
     const rating = movie.vote_average ? movie.vote_average.toFixed(1) : 'no rating';
 
     return (
-        <main>
+        <Container>
             <Link to={backLinkHref}>Back</Link>
-            <div>
+            <DetailsContainer>
                 <img src={
                     movie.poster_path
                         ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
@@ -45,25 +47,29 @@ export default function MovieDetails() {
                     width={250}
                     alt="poster"
                 />
-                <h2>{movie.title} {releaseYear}</h2>
-                <p>Rating: {rating}</p>
-                <h3>Overview</h3>
-                <p>{movie.overview}</p>
-                <h3>Genres</h3>
-                <p>{genres()}</p>
-            </div >
+                <div>
+                    <h2>{movie.title} {releaseYear}</h2>
+                    <p>Rating: {rating}</p>
+                    <h3>Overview</h3>
+                    <p>{movie.overview}</p>
+                    <h3>Genres</h3>
+                    <Genres>{genres()}</Genres>
+                </div>
+            </DetailsContainer>
 
             <div>
-                <p>Additional information</p>
-                <ul>
-                    <li><Link to="cast">Cast</Link></li>
-                    <li><Link to="reviews">Reviews</Link></li>
-                </ul>
+                <AdditionalInformation>
+                    <p>Additional information</p>
+                    <ul>
+                        <li><Link to="cast">Cast</Link></li>
+                        <li><Link to="reviews">Reviews</Link></li>
+                    </ul>
+                </AdditionalInformation>
 
                 <Suspense fallback={<div>Loading subpage...</div>}>
                     <Outlet />
                 </Suspense>
             </div>
-        </main>
+        </Container>
     )
 }
