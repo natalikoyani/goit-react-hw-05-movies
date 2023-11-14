@@ -2,8 +2,7 @@ import { useEffect, useState, Suspense } from 'react';
 import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
 import { fetchMovieById } from 'api';
 import { nanoid } from 'nanoid';
-import { Container } from '../components/Layout.styled';
-import { DetailsContainer, Genres, AdditionalInformation } from './MovieDetailsPage.styled';
+import { Details, Genres, AdditionalInfo, FlexWrapper, TextWrapper} from './MovieDetailsPage.styled';
 
 export default function MovieDetails() {
     const { movieId } = useParams();
@@ -36,40 +35,43 @@ export default function MovieDetails() {
     const rating = movie.vote_average ? movie.vote_average.toFixed(1) : 'no rating';
 
     return (
-        <Container>
+        <>
             <Link to={backLinkHref}>Back</Link>
-            <DetailsContainer>
-                <img src={
+            <Details>
+                <FlexWrapper>
+                    <img src={
                     movie.poster_path
                         ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
                         : defaultImg
-                }
+                    }
                     width={250}
                     alt="poster"
-                />
-                <div>
-                    <h2>{movie.title} {releaseYear}</h2>
-                    <p>Rating: {rating}</p>
-                    <h3>Overview</h3>
-                    <p>{movie.overview}</p>
-                    <h3>Genres</h3>
-                    <Genres>{genres()}</Genres>
-                </div>
-            </DetailsContainer>
-
-            <div>
-                <AdditionalInformation>
-                    <p>Additional information</p>
+                    />
+                    <div>
+                        <TextWrapper>
+                            <h2>{movie.title} {releaseYear}</h2>
+                            <p>Rating: {rating}</p>
+                            <h3>Overview</h3>
+                            <p>{movie.overview}</p>
+                            <h3>Genres</h3>
+                            <Genres>{genres()}</Genres>
+                        </TextWrapper>
+                    </div>
+                    </FlexWrapper>
+            </Details>
+            <AdditionalInfo>
+                <TextWrapper>
+                    <p>Additional formation</p>
                     <ul>
                         <li><Link to="cast">Cast</Link></li>
                         <li><Link to="reviews">Reviews</Link></li>
                     </ul>
-                </AdditionalInformation>
+                </TextWrapper>   
+            </AdditionalInfo>
 
-                <Suspense fallback={<div>Loading subpage...</div>}>
-                    <Outlet />
-                </Suspense>
-            </div>
-        </Container>
+            <Suspense fallback={<div>Loading subpage...</div>}>
+                <Outlet />
+            </Suspense>
+        </>
     )
 }

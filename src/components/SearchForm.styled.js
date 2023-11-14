@@ -20,5 +20,6 @@ export const Button = styled.button`
 
 export const Form = styled.form`
   display: flex;
-  gap: 2px
+  gap: 2px;
+  margin-bottom: 20px;
 `;

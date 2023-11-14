@@ -5,14 +5,14 @@ import { Header } from './Layout.styled';
 
 export const Layout = () => {
   return (
-    <div>
+    <>
       <Header>
-        <Navigation />
+          <Navigation />
       </Header>
 
       <Suspense fallback={<div>Loading page...</div>}>
         <Outlet />
       </Suspense>
-    </div>
+    </>
   );
 };

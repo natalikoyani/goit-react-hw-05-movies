@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchCast } from "api";
+import { CastContainer, CastItem, CastImg } from './CastPage.styled';
 
 export default function Cast() {
     const { movieId } = useParams();
@@ -24,21 +25,20 @@ export default function Cast() {
     const mainCast = cast.slice(0, 10);
 
     return (
-        <ul>
+        <CastContainer>
             {mainCast.map(actor => (
-                <li key={actor.id}>
-                    <img src={
+                <CastItem key={actor.id}>
+                    <CastImg src={
                         actor.profile_path
                             ? `https://image.tmdb.org/t/p/w500/${actor.profile_path}`
                             : defaultImg
                     }
-                        width={125}
                         alt="actor"
-                    ></img>
+                    ></CastImg>
                     <p>{actor.name}</p>
                     <p>Character: {actor.character}</p>
-                </li>
+                </CastItem>
             ))}
-        </ul>
+        </CastContainer>
     )
 }
