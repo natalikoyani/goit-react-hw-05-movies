@@ -6,7 +6,7 @@ import { Details, Genres, AdditionalInfo, FlexWrapper, TextWrapper} from './Movi
 
 export default function MovieDetails() {
     const { movieId } = useParams();
-    const [movie, setMovie] = useState({});
+    const [movie, setMovie] = useState(null);
     const location = useLocation();
     const backLinkHref = location.state?.from ?? '/';
 
@@ -24,6 +24,10 @@ export default function MovieDetails() {
 
         fetchData();
     }, [movieId]);
+
+    if(!movie) {
+        return
+    }
 
     const defaultImg = 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
     const releaseYear = movie.release_date ? `(${movie.release_date.substring(0, 4)})` : "";

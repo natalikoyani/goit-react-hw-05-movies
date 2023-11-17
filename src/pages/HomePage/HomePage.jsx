@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchTrending } from 'api';
 import { MoviesList } from 'components/MoviesList';
 import { Title } from './HomePage.styled';
-import { PageContainer } from 'components/Layout.styled';
+import { PageContainer } from 'components/Layout/Layout.styled';
 
 export default function HomePage() {
     const [trendingMovies, setTrendingMovies] = useState([]);
@@ -23,7 +23,7 @@ export default function HomePage() {
     return (
         <PageContainer>
             <Title>Trending today</Title>
-            <MoviesList movies={trendingMovies} basePath="movies/" />
+            <MoviesList movies={trendingMovies} />
         </PageContainer>    
     )
 }

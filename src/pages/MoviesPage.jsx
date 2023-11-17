@@ -1,9 +1,9 @@
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { MoviesList } from "components/MoviesList";
-import { SearchForm } from "components/SearchForm";
+import { SearchForm } from "components/SearchForm/SearchForm";
 import { fetchMovies } from 'api';
-import { PageContainer } from 'components/Layout.styled';
+import { PageContainer } from 'components/Layout/Layout.styled';
 
 export default function MoviesPage() {
     const [movies, setMovies] = useState([]);
@@ -25,16 +25,14 @@ export default function MoviesPage() {
         fetchData();
     }, [query])
 
-    const onSubmit = evt => {
-        evt.preventDefault();
-        const form = evt.currentTarget;
-        setParams({ query: form.elements.input.value });
+    const onSubmit = value => {
+        setParams({ query: value });
     };
 
     return (
         <PageContainer>
             <SearchForm onSubmit={onSubmit} value={query} />
-            <MoviesList movies={movies} basePath='' />
+            <MoviesList movies={movies} />
         </PageContainer>
     )
 }

@@ -42,7 +42,6 @@ export const fetchReviews = async (id) => {
 export const fetchMovies = async (query) => {
     try {
         const response = await axios.get(`/search/movie?query=${query}&api_key=${API_KEY}`);
-        console.log(response.data.results);
         return response.data.results;
     } catch (error) {
         console.error(error.message);

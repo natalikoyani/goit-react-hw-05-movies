@@ -22,11 +22,10 @@ export default function Cast() {
     }, [movieId]);
 
     const defaultImg = 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
-    const mainCast = cast.slice(0, 10);
 
     return (
         <CastContainer>
-            {mainCast.map(actor => (
+            {cast.map(actor => (
                 <CastItem key={actor.id}>
                     <CastImg src={
                         actor.profile_path
